@@ -11,7 +11,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: postgres-pod-delete
-  namespace: your-namespace
+  namespace: postgres-clusters
 subjects:
   - kind: ServiceAccount
     name: postgres-pod
@@ -26,26 +26,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: postgres-pod-delete
-  namespace: your-namespace
+  namespace: postgres-clusters
 rules:
   - apiGroups: [""]
     resources: ["pods"]
     verbs: ["delete"]
 ```
-
-docker build -t harbor.svc.vkusvill.ru/zalando/patroni-selfheal:latest .
-
-postgresql.acid.zalan.do/test-sonarqube
-  добавить раздел: 
-
-
-  sidecars:
-    - name: "patroni-selfheal"
-      image: "harbor.svc.vkusvill.ru/zalando/patroni-selfheal:latest"
-      resources:
-        limits:
-          cpu: 500m
-          memory: 500Mi
-        requests:
-          cpu: 100m
-          memory: 100Mi
